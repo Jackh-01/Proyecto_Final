@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Sprite/425.jpg</file>
+        <file>Sprite/26346.jpg</file>
+        <file>Sprite/golfers.png</file>
+        <file>Sprite/kisspng-stone-wall-sprite-tile-based-video-game-isometric-5aee2a881524f1.5094501115255578960866.png</file>
+        <file>Sprite/modern-punks.png</file>
+        <file>Sprite/PC Computer - Stardew Valley - Cat.png</file>
+        <file>Sprite/PC Computer - Stardew Valley - Dog Brown.png</file>
+        <file>Sprite/PC Computer - Stardew Valley - Furniture.png</file>
+        <file>Sprite/villager-females.png</file>
+        <file>Sprite/villager-males_1.png</file>
+    </qresource>
+</RCC>
