@@ -12,7 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGraphicsView>
-#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
@@ -24,7 +23,6 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QGridLayout *gridLayout;
     QGraphicsView *graphicsView;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -33,22 +31,18 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1920, 1080);
-        MainWindow->setMinimumSize(QSize(1920, 1080));
-        MainWindow->setMaximumSize(QSize(1920, 1080));
+        MainWindow->resize(1500, 900);
+        MainWindow->setMinimumSize(QSize(0, 0));
+        MainWindow->setMaximumSize(QSize(1600, 900));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        gridLayout = new QGridLayout(centralwidget);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         graphicsView = new QGraphicsView(centralwidget);
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
-
-        gridLayout->addWidget(graphicsView, 0, 0, 1, 1);
-
+        graphicsView->setGeometry(QRect(9, 9, 1920, 1080));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1920, 22));
+        menubar->setGeometry(QRect(0, 0, 1500, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));

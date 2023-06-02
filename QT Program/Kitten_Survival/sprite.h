@@ -15,7 +15,7 @@ class sprite : public QObject, public QGraphicsPixmapItem
 public:
     sprite();
     ~sprite();
-    void set_imagen(int ancho, int alto, int x_origin, int y_origin, int x_sprites, int y_sprites, QString ubicacion);
+    void set_imagen(int ancho, int alto, int x_origin, int y_origin, int x_sprites, int y_sprites, QString ubicacion,int ancho_x, int ancho_y);
     void select_sprite(int x, int y);
 
 

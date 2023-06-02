@@ -2,13 +2,7 @@
 #include "mapa.h"
 #include "ui_mainwindow.h"
 
-#include <QMainWindow>
-#include <QPainter>
-#include <QGraphicsItem>
-#include <QRectF>
-#include <QDesktopWidget>
-#include <QDebug>
-#include <QGraphicsScene>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,4 +21,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    Niveles->Mover_Personaje(event);
+}

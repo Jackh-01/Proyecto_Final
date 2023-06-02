@@ -10,15 +10,19 @@ CONFIG += c++17
 
 SOURCES += \
     bloques.cpp \
+    enemigos.cpp \
     main.cpp \
     mainwindow.cpp \
     mapa.cpp \
+    personaje.cpp \
     sprite.cpp
 
 HEADERS += \
     bloques.h \
+    enemigos.h \
     mainwindow.h \
     mapa.h \
+    personaje.h \
     sprite.h
 
 FORMS += \

@@ -11,7 +11,16 @@ class Bloques: public sprite
 {
 public:
     Bloques(int TipoBloque);
+    ~Bloques();
+    void Iniciar(int tipoBloque);
+    void Finalizar();
 
+private slots:
+    void iniciarExplosion();
+
+private:
+    QTimer* ExplotarBloque;
+    int posicion, tipoB;
 };
 
 #endif // BLOQUES_H
