@@ -9,12 +9,12 @@
 
 Mapa::Mapa()
 {
-    int filas = 15, columnas = 15;
     for (int i = 0; i <= 3 ; i++)
     {
         Posicion_X_Ememigo[i]=0;
         Posicion_Y_Ememigo[i]=0;
     }
+    GenerarLaberinto_1();
     MovimientoEnemigos = new QTimer(this);
     connect(MovimientoEnemigos, &QTimer::timeout, this, &Mapa::MoverEnemigos);
     srand(time(NULL));
@@ -23,58 +23,73 @@ Mapa::Mapa()
     MovimientoEnemigos->start(100);
     P_Ppal = new Personaje();
     addItem(P_Ppal);
-    P_Ppal->setPos(48,0);
+    P_Ppal->setPos(48,16);
     P_Ppal->select_sprite(3,0);
     boom = false;
 }
 
 Mapa::~Mapa()
 {
-    for (int i = 0; i < filas; i++)
+    for (int i = 0; i < bloques_y_mapa; i++)
     {
         delete[] Matriz[i];
     }
     delete[] Matriz;
 }
 
-void Mapa::GenerarMapa()
+void Mapa::GenerarLaberinto_1()
 {
     Matriz = new int*[bloques_y_mapa];
     for (int i = 0;i<bloques_y_mapa;i++)
     {
         Matriz[i] = new int[bloques_x_mapa];
     }
+    int laberintoDatos[17][31] = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,0,0,1,1,1,0,1,1,1,0,1,1,1,1,1,0},{0,1,0,0,0,1,0,0,0,0,0,0,1,0,1,1,1,1,0,1,0,1,0,1,0,1,0,1,0,0,0},        {0,1,0,1,1,1,0,1,1,1,1,1,1,0,1,0,0,1,0,1,0,1,0,1,0,1,0,1,1,1,0},{0,1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0},{0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0},{0,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0},        {0,1,0,1,1,1,0,1,1,1,0,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0},{0,1,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,0,1,0,0,0,1,0,0,0,0,0,0,1,0},{0,1,0,1,0,1,1,1,0,1,0,1,0,0,1,0,0,0,1,1,1,1,1,0,1,1,1,1,1,1,0},{0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,0,0,0,1,0,1,0,0,0,0,0,0},{0,1,0,0,0,1,1,1,0,1,1,1,0,0,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,0},        {0,1,1,1,0,1,0,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,1,0,0,1,0},{0,1,0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,1,0,1,0},{0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,1,1,1,0,0,1,0,1,0},{0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
+    for (int i = 0; i < bloques_y_mapa; ++i)
+    {
+        for (int j = 0; j < bloques_x_mapa; ++j)
+        {
+            Matriz[i][j] = laberintoDatos [i][j];
+        }
+    }
+}
+
+void Mapa::GenerarMapa()
+{    
     int y;
     for (int i = 0;i<bloques_y_mapa;i++)
     {
         for (int j = 0;j<bloques_x_mapa;j++)
         {
 
-            if (i==0 || j== 0 || i==bloques_y_mapa-1 || j== bloques_x_mapa-1 || (i%2==0 && j%2 ==0))
+//            if (i==0 || j== 0 || i==bloques_y_mapa-1 || j== bloques_x_mapa-1 || (i%2==0 && j%2 ==0))
+            if (Matriz[i][j] == 0)
             {
                 bl_mapa[i][j] = new Bloques(0);
                 Matriz[i][j] = 0;
             }
-            else if ( (i==1 && (j==1 || j==2)) || ((i==2 && j==1)) || (i==bloques_y_mapa-2 && (j==bloques_x_mapa-2 || j==bloques_x_mapa-3)) || (i==bloques_y_mapa-3 && j==bloques_x_mapa-2))
+//            else if ( (i==1 && (j==1 || j==2)) || ((i==2 && j==1)) || (i==bloques_y_mapa-2 && (j==bloques_x_mapa-2 || j==bloques_x_mapa-3)) || (i==bloques_y_mapa-3 && j==bloques_x_mapa-2))
+            else if (Matriz[i][j] == 1)
             {
                 bl_mapa[i][j] = new Bloques(1);
                 Matriz[i][j] = 1;
             }
-            else
-            {
-                y = rand() % 2 + 1;
-                if (y == 1)
-                {
-                    bl_mapa[i][j] = new Bloques(1);
-                    Matriz[i][j] = 1;
-                }
-                else
-                {
-                    bl_mapa[i][j] = new Bloques(2);
-                    Matriz[i][j] = 2;
-                }
-
-            }
+//            else
+//            {
+//                y = rand() % 2 + 1;
+//                if (y == 1)
+//                {
+//                    bl_mapa[i][j] = new Bloques(1);
+//                    Matriz[i][j] = 1;
+//                }
+//                else
+//                {
+//                    bl_mapa[i][j] = new Bloques(2);
+//                    Matriz[i][j] = 2;
+//                    bl_mapa[i][j] = new Bloques(1);
+//                    Matriz[i][j] = 1;
+//                }
+//            }
             addItem(bl_mapa[i][j]);
             bl_mapa[i][j]->setPos(j*bloques_ancho,i*bloques_alto);
         }
@@ -90,13 +105,12 @@ void Mapa::Mover_Personaje(QKeyEvent *event)
     int bloqueX = PosicionX / bloques_ancho;
     int bloqueY = PosicionY / bloques_alto;
 
-
     if(event->key()==Qt::Key_D)
     {
         FuturaPosicionX = (PosicionX+16) / bloques_ancho;
         if (FuturaPosicionX==bloqueX)
         {
-            P_Ppal->tecla_pressed(event,16,0);
+            P_Ppal->tecla_pressed(event,4,0);
         }
         else
         {
@@ -107,17 +121,16 @@ void Mapa::Mover_Personaje(QKeyEvent *event)
             else
             {
 
-                P_Ppal->tecla_pressed(event,16,0);
+                P_Ppal->tecla_pressed(event,4,0);
             }
         }
-
     }
     else if(event->key()==Qt::Key_A)
     {
         FuturaPosicionX = (PosicionX-16)/ bloques_ancho;
         if (FuturaPosicionX==bloqueX)
         {
-            P_Ppal->tecla_pressed(event,16,0);
+            P_Ppal->tecla_pressed(event,4,0);
         }
         else
         {
@@ -127,7 +140,7 @@ void Mapa::Mover_Personaje(QKeyEvent *event)
             }
             else
             {
-                P_Ppal->tecla_pressed(event,16,0);
+                P_Ppal->tecla_pressed(event,4,0);
             }
         }
     }
@@ -136,7 +149,7 @@ void Mapa::Mover_Personaje(QKeyEvent *event)
         FuturaPosicionY = (PosicionY+16) / bloques_alto;
         if (FuturaPosicionY==bloqueY)
         {
-            P_Ppal->tecla_pressed(event,0,16);
+            P_Ppal->tecla_pressed(event,0,4);
         }
         else
         {
@@ -146,7 +159,7 @@ void Mapa::Mover_Personaje(QKeyEvent *event)
             }
             else
             {
-                P_Ppal->tecla_pressed(event,0,16);
+                P_Ppal->tecla_pressed(event,0,4);
             }
         }
     }
@@ -155,7 +168,7 @@ void Mapa::Mover_Personaje(QKeyEvent *event)
         FuturaPosicionY = (PosicionY-16) / bloques_alto;
         if (FuturaPosicionY==bloqueY)
         {
-            P_Ppal->tecla_pressed(event,0,16);
+            P_Ppal->tecla_pressed(event,0,4);
         }
         else
         {
@@ -165,7 +178,7 @@ void Mapa::Mover_Personaje(QKeyEvent *event)
             }
             else
             {
-                P_Ppal->tecla_pressed(event,0,16);
+                P_Ppal->tecla_pressed(event,0,4);
             }
         }
     }
@@ -190,14 +203,6 @@ void Mapa::GenerarEnemigosySalida()
         Enemy[i]->select_sprite(0,0);
 
     }
-    CoordenadaX = (bloques_x_mapa-10) + rand() % (bloques_x_mapa - (bloques_x_mapa-10));
-    CoordenadaY = (bloques_y_mapa-10) + rand() % (bloques_y_mapa - (bloques_y_mapa-10));
-    while (Matriz[CoordenadaY][CoordenadaX]!=2)
-    {
-        CoordenadaX = (bloques_x_mapa-10) + rand() % (bloques_x_mapa - (bloques_x_mapa-10));
-        CoordenadaY = (bloques_y_mapa-10) + rand() % (bloques_y_mapa - (bloques_y_mapa-10));
-    }
-    Matriz[CoordenadaY][CoordenadaX]=3;
 }
 
 void Mapa::MoverEnemigos()
@@ -209,7 +214,7 @@ void Mapa::MoverEnemigos()
 }
 
 
-//int laberintoDatos[18][30] = {
+//int laberintoDatos[17][31] = {
 //    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //    {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
 //    {0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},

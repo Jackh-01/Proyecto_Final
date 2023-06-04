@@ -17,6 +17,7 @@ class Mapa : public QGraphicsScene
 public:
     Mapa();
     ~Mapa();
+    void GenerarLaberinto_1();
     void GenerarMapa ();
     void Mover_Personaje(QKeyEvent *event);
     void GenerarEnemigosySalida();
@@ -26,13 +27,12 @@ private:
     int** Matriz;
     int Posicion_X_Ememigo[4];
     int Posicion_Y_Ememigo[4];
-    int filas, columnas, CoordenadaX, CoordenadaY;
+    int CoordenadaX, CoordenadaY;
     Bloques *bl_mapa[bloques_y_mapa][bloques_x_mapa];
     Personaje *P_Ppal;
     bool boom;
-    Enemigos *Enemy[4];
+    Enemigos *Enemy[4 ];
     QTimer* MovimientoEnemigos;
-    //    Enemigos *EnemigoPrueba;
 
 };
 
