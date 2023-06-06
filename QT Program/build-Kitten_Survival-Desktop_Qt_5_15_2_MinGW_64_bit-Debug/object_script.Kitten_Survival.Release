@@ -1,0 +1,12 @@
+release/bloques.o
+release/enemigos.o
+release/main.o
+release/mainwindow.o
+release/mapa.o
+release/personaje.o
+release/sprite.o
+release/qrc_Pictures.o
+release/moc_mainwindow.o
+release/moc_mapa.o
+release/moc_personaje.o
+release/moc_sprite.o

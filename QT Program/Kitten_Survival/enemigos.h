@@ -7,23 +7,17 @@ class Enemigos: public sprite
 {
 public:
     Enemigos(int numero);
-    ~Enemigos();
-    void Iniciar();
-    void Finalizar();
-    void GenerarSemilla( int posicionX, int posicionY);
-    void GenerarMovimiento(int** map, int posicionX, int posicionY);
-
-
-private slots:
-    void iniciaMuerte();
+    void GenerarSemilla(int posicionX, int posicionY, int velocidad, int aceleracion);
+    void GenerarMovimiento(int** map, int posicionX, int posicionY, int velocidad,int ace);
+    void PerseguirPersonaje(int posicionX_Personaje, int posicionY_Personaje);
 
 signals:
     void EnemigoMurio(int NumeroEnemigo);
 
 private:
     int NumeroEnemigo, posicionenemigo, semilla, var;
-    QTimer* IniciarMuerte;
-    int bloqueX,bloqueY,FuturaPosicionX, FuturaPosicionY, FuturoBloqueX_1, FuturoBloqueY_1,FuturoBloqueX_2, FuturoBloqueY_2;
+    int bloqueX,bloqueY,FuturaPosicionX, FuturaPosicionY,FuturoBloqueY_1,FuturoBloqueX_1, aceleracion, tiempo;
+
 };
 
 #endif // ENEMIGOS_H

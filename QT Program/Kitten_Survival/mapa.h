@@ -22,17 +22,21 @@ public:
     void Mover_Personaje(QKeyEvent *event);
     void GenerarEnemigosySalida();
     void MoverEnemigos();
+    bool VerificarMuros(int posicion1_x, int posicion1_y, int posicion2_x, int posicion2_y);
+    void Monitorear_Posiciones();
+
 
 private:
     int** Matriz;
     int Posicion_X_Ememigo[4];
     int Posicion_Y_Ememigo[4];
-    int CoordenadaX, CoordenadaY;
+    int CoordenadaX, CoordenadaY, vidas;
     Bloques *bl_mapa[bloques_y_mapa][bloques_x_mapa];
     Personaje *P_Ppal;
-    bool boom;
+    bool Descubierto;
     Enemigos *Enemy[4 ];
     QTimer* MovimientoEnemigos;
+    QTimer* Posicion_Personajes;
 
 };
 
