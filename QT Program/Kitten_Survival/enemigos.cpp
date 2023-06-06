@@ -6,16 +6,25 @@
 Enemigos::Enemigos(int numero)
 {
     srand(time(NULL));
-    set_imagen(32,32,0,0,4,4,":/Sprite/PC Computer - Stardew Valley - Dog Brown.png",48,48);
-    NumeroEnemigo = numero;
+    if (numero == 0)
+    {
+        set_imagen(32,32,0,0,4,4,":/Sprite/PC Computer - Stardew Valley - Dog Brown.png",48,48);
+    }
+    else if (numero == 1)
+    {
+        set_imagen(48,48,0,0,3,4,":/Sprite/golfers.png",48,48);
+    }
+    else if (numero == 2)
+    {
+        set_imagen(48,48,0,0,3,4,":/Sprite/modern-punks.png",48,48);
+    }
+    TipoEnemigo = numero;
     posicionenemigo = 0;
     semilla = rand() % 4;
     var = 0;
     aceleracion = 0;
     tiempo = 0;
 }
-
-
 
 void Enemigos::GenerarSemilla(int posicionX, int posicionY,int velocidad, int aceleracion)
 {
@@ -51,6 +60,11 @@ void Enemigos::GenerarSemilla(int posicionX, int posicionY,int velocidad, int ac
     }
 }
 
+void Enemigos::ModificarSemilla(int nuevaSemilla)
+{
+    semilla = nuevaSemilla;
+}
+
 void Enemigos::GenerarMovimiento(int** map, int posicionX, int posicionY, int velocidad, int ace)
 {
     GenerarSemilla( posicionX, posicionY, velocidad, ace);
@@ -59,35 +73,81 @@ void Enemigos::GenerarMovimiento(int** map, int posicionX, int posicionY, int ve
         // Velocidad = 16
         if(semilla == 0)
         {
-            setPos(x(),y()-(velocidad+(ace*tiempo)));
-            select_sprite(var,2);
-            var++;
-            tiempo++;
-            if(var>3) var = 0;
+            if (TipoEnemigo == 0)
+            {
+                setPos(x(),y()-(velocidad+(ace*tiempo)));
+                select_sprite(var,2);
+                var++;
+                tiempo++;
+                if(var>3) var = 0;
+            }
+            else
+            {
+                setPos(x(),y()-(velocidad+(ace*tiempo)));
+                select_sprite(var,3);
+                var++;
+                tiempo++;
+                if(var>2) var = 0;
+            }
+
         }
         else if(semilla == 1)
         {
-            setPos(x()+(velocidad+(ace*tiempo)),y());
-            select_sprite(var,1);
-            var++;
-            tiempo++;
-            if(var>3) var = 0;
+            if (TipoEnemigo == 0)
+            {
+                setPos(x()+(velocidad+(ace*tiempo)),y());
+                select_sprite(var,1);
+                var++;
+                tiempo++;
+                if(var>3) var = 0;
+            }
+            else
+            {
+                setPos(x()+(velocidad+(ace*tiempo)),y());
+                select_sprite(var,2);
+                var++;
+                tiempo++;
+                if(var>2) var = 0;
+            }
         }
         else if(semilla == 2)
         {
-            setPos(x(),y()+(velocidad+(ace*tiempo)));
-            select_sprite(var,0);
-            var++;
-            tiempo++;
-            if(var>3) var = 0;
+            if (TipoEnemigo == 0)
+            {
+                setPos(x(),y()+(velocidad+(ace*tiempo)));
+                select_sprite(var,0);
+                var++;
+                tiempo++;
+                if(var>3) var = 0;
+            }
+            else
+            {
+                setPos(x(),y()+(velocidad+(ace*tiempo)));
+                select_sprite(var,0);
+                var++;
+                tiempo++;
+                if(var>2) var = 0;
+            }
+
         }
         else if(semilla == 3)
         {
-            setPos(x()-(velocidad+(ace*tiempo)),y());
-            select_sprite(var,3);
-            var++;
-            tiempo++;
-            if(var>3) var = 0;
+            if (TipoEnemigo == 0)
+            {
+                setPos(x()-(velocidad+(ace*tiempo)),y());
+                select_sprite(var,3);
+                var++;
+                tiempo++;
+                if(var>3) var = 0;
+            }
+            else
+            {
+                setPos(x()-(velocidad+(ace*tiempo)),y());
+                select_sprite(var,1);
+                var++;
+                tiempo++;
+                if(var>2) var = 0;
+            }
         }
     }
     else

@@ -1,4 +1,6 @@
 debug/bloques.o
+debug/comida.o
+debug/comodin.o
 debug/enemigos.o
 debug/main.o
 debug/mainwindow.o

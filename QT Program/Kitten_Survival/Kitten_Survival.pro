@@ -10,6 +10,8 @@ CONFIG += c++17
 
 SOURCES += \
     bloques.cpp \
+    comida.cpp \
+    comodin.cpp \
     enemigos.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -19,6 +21,8 @@ SOURCES += \
 
 HEADERS += \
     bloques.h \
+    comida.h \
+    comodin.h \
     enemigos.h \
     mainwindow.h \
     mapa.h \

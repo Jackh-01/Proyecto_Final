@@ -5,6 +5,8 @@
 #include <QGraphicsScene>
 #include "bloques.h"
 #include "Personaje.h"
+#include "comida.h"
+#include "comodin.h"
 #include "enemigos.h"
 
 #define bloques_x_mapa 31
@@ -22,21 +24,23 @@ public:
     void Mover_Personaje(QKeyEvent *event);
     void GenerarEnemigosySalida();
     void MoverEnemigos();
-    bool VerificarMuros(int posicion1_x, int posicion1_y, int posicion2_x, int posicion2_y);
+    bool VerificarMuros(int posicion1_x, int posicion1_y, int posicion2_x, int posicion2_y,Enemigos* Enemy);
     void Monitorear_Posiciones();
 
 
 private:
     int** Matriz;
-    int Posicion_X_Ememigo[4];
-    int Posicion_Y_Ememigo[4];
+    int Posicion_X_Ememigo[6];
+    int Posicion_Y_Ememigo[6];
     int CoordenadaX, CoordenadaY, vidas;
     Bloques *bl_mapa[bloques_y_mapa][bloques_x_mapa];
     Personaje *P_Ppal;
     bool Descubierto;
-    Enemigos *Enemy[4 ];
+    Enemigos *Enemy[6];
     QTimer* MovimientoEnemigos;
     QTimer* Posicion_Personajes;
+    Comida* Premio;
+    Comodin* Ayudas[2];
 
 };
 

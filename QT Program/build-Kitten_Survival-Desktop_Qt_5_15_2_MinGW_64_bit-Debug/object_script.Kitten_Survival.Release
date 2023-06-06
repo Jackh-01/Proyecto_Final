@@ -1,4 +1,6 @@
 release/bloques.o
+release/comida.o
+release/comodin.o
 release/enemigos.o
 release/main.o
 release/mainwindow.o

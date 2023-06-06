@@ -27,9 +27,21 @@ Mapa::Mapa()
     P_Ppal = new Personaje();
     addItem(P_Ppal);
     P_Ppal->setPos(48,16);
-    P_Ppal->select_sprite(3,0);
+    P_Ppal->select_sprite(0,0);
     vidas = 3;
     Descubierto = false;
+    Premio = new Comida();
+    addItem(Premio);
+    Premio->setPos(48*29,48*3);
+    Premio->select_sprite(0,0);
+    Ayudas[0] = new Comodin(48);
+    addItem(Ayudas[0]);
+    Ayudas[0]->setPos(48*5+15,48*9-15);
+    Ayudas[0]->select_sprite(0,0);
+    Ayudas[1] = new Comodin(24);
+    addItem(Ayudas[1]);
+    Ayudas[1]->setPos(48*22+17,48*13+24);
+    Ayudas[1]->select_sprite(0,0);
 }
 
 Mapa::~Mapa()
@@ -175,18 +187,33 @@ void Mapa::GenerarEnemigosySalida()
     {
         CoordenadaX = (bloques_x_mapa/2) + rand() % (bloques_x_mapa + 1 - (bloques_x_mapa/2));
         CoordenadaY = 1 + rand() % (bloques_y_mapa - 1);
-        while (Matriz[CoordenadaY][CoordenadaX]!=1 || (CoordenadaX == Posicion_X_Ememigo[0] && CoordenadaY == Posicion_Y_Ememigo[0] ) || (CoordenadaX == Posicion_X_Ememigo[1] && CoordenadaY == Posicion_Y_Ememigo[1] )|| (CoordenadaX == Posicion_X_Ememigo[2] && CoordenadaY == Posicion_Y_Ememigo[2] )|| (CoordenadaX == Posicion_X_Ememigo[3] && CoordenadaY == Posicion_Y_Ememigo[3] ))
+        while (Matriz[CoordenadaY][CoordenadaX]!=1 || (CoordenadaX == Posicion_X_Ememigo[0] && CoordenadaY == Posicion_Y_Ememigo[0] ) || (CoordenadaX == Posicion_X_Ememigo[1] && CoordenadaY == Posicion_Y_Ememigo[1] )|| (CoordenadaX == Posicion_X_Ememigo[2] && CoordenadaY == Posicion_Y_Ememigo[2] )|| (CoordenadaX == Posicion_X_Ememigo[3] && CoordenadaY == Posicion_Y_Ememigo[3] )|| (CoordenadaX == Posicion_X_Ememigo[4] && CoordenadaY == Posicion_Y_Ememigo[4] )|| (CoordenadaX == Posicion_X_Ememigo[5] && CoordenadaY == Posicion_Y_Ememigo[5] ))
         {
             CoordenadaX = (bloques_x_mapa/2) + rand() % (bloques_x_mapa + 1 - (bloques_x_mapa/2));
             CoordenadaY = 1 + rand() % (bloques_y_mapa - 1);
         }
         Posicion_X_Ememigo[i]=CoordenadaX;
         Posicion_Y_Ememigo[i]=CoordenadaY;
-        Enemy[i]= new Enemigos(i);
+        Enemy[i]= new Enemigos(0);
         addItem(Enemy[i]);
         Enemy[i]->setPos(CoordenadaX*bloques_ancho,(CoordenadaY*bloques_alto)-45);
         Enemy[i]->select_sprite(0,0);
-
+    }
+    for (int i = 1; i<3;i++)
+    {
+        CoordenadaX = (bloques_x_mapa/2) + rand() % (bloques_x_mapa + 1 - (bloques_x_mapa/2));
+        CoordenadaY = 1 + rand() % (bloques_y_mapa - 1);
+        while (Matriz[CoordenadaY][CoordenadaX]!=1 || (CoordenadaX == Posicion_X_Ememigo[0] && CoordenadaY == Posicion_Y_Ememigo[0] ) || (CoordenadaX == Posicion_X_Ememigo[1] && CoordenadaY == Posicion_Y_Ememigo[1] )|| (CoordenadaX == Posicion_X_Ememigo[2] && CoordenadaY == Posicion_Y_Ememigo[2] )|| (CoordenadaX == Posicion_X_Ememigo[3] && CoordenadaY == Posicion_Y_Ememigo[3] )|| (CoordenadaX == Posicion_X_Ememigo[4] && CoordenadaY == Posicion_Y_Ememigo[4] )|| (CoordenadaX == Posicion_X_Ememigo[5] && CoordenadaY == Posicion_Y_Ememigo[5] ))
+        {
+            CoordenadaX = (bloques_x_mapa/2) + rand() % (bloques_x_mapa + 1 - (bloques_x_mapa/2));
+            CoordenadaY = 1 + rand() % (bloques_y_mapa - 1);
+        }
+        Posicion_X_Ememigo[3+i]=CoordenadaX;
+        Posicion_Y_Ememigo[3+i]=CoordenadaY;
+        Enemy[3+i]= new Enemigos(i);
+        addItem(Enemy[3+i]);
+        Enemy[3+i]->setPos(CoordenadaX*bloques_ancho,(CoordenadaY*bloques_alto)-45);
+        Enemy[3+i]->select_sprite(0,0);
     }
 }
 
@@ -198,6 +225,8 @@ void Mapa::MoverEnemigos()
         Enemy[1]->GenerarMovimiento(Matriz,Enemy[1]->x()+16,Enemy[1]->y()+48,16,0);
         Enemy[2]->GenerarMovimiento(Matriz,Enemy[2]->x()+16,Enemy[2]->y()+48,16,0);
         Enemy[3]->GenerarMovimiento(Matriz,Enemy[3]->x()+16,Enemy[3]->y()+48,16,0);
+        Enemy[4]->GenerarMovimiento(Matriz,Enemy[4]->x()+16,Enemy[4]->y()+48,16,0);
+        Enemy[5]->GenerarMovimiento(Matriz,Enemy[5]->x()+16,Enemy[5]->y()+48,16,0);
     }
     else
     {
@@ -205,10 +234,12 @@ void Mapa::MoverEnemigos()
         Enemy[1]->GenerarMovimiento(Matriz,Enemy[1]->x()+16,Enemy[1]->y()+48,16,1);
         Enemy[2]->GenerarMovimiento(Matriz,Enemy[2]->x()+16,Enemy[2]->y()+48,16,1);
         Enemy[3]->GenerarMovimiento(Matriz,Enemy[3]->x()+16,Enemy[3]->y()+48,16,1);
+        Enemy[4]->GenerarMovimiento(Matriz,Enemy[4]->x()+16,Enemy[4]->y()+48,16,1);
+        Enemy[5]->GenerarMovimiento(Matriz,Enemy[5]->x()+16,Enemy[5]->y()+48,16,1);
     }
 }
 
-bool Mapa::VerificarMuros(int posicion1_x, int posicion1_y, int posicion2_x, int posicion2_y)
+bool Mapa::VerificarMuros(int posicion1_x, int posicion1_y, int posicion2_x, int posicion2_y, Enemigos* Enemy)
 {
     if (posicion1_x == posicion2_x)
     {
@@ -229,6 +260,7 @@ bool Mapa::VerificarMuros(int posicion1_x, int posicion1_y, int posicion2_x, int
                         return false;
                     }
                 }
+                Enemy->ModificarSemilla(0);
                 return true;
             }
             else
@@ -245,6 +277,7 @@ bool Mapa::VerificarMuros(int posicion1_x, int posicion1_y, int posicion2_x, int
                         return false;
                     }
                 }
+                Enemy->ModificarSemilla(2);
                 return true;
             }
         }
@@ -272,6 +305,7 @@ bool Mapa::VerificarMuros(int posicion1_x, int posicion1_y, int posicion2_x, int
                         return false;
                     }
                 }
+                Enemy->ModificarSemilla(3);
                 return true;
             }
             else
@@ -288,6 +322,7 @@ bool Mapa::VerificarMuros(int posicion1_x, int posicion1_y, int posicion2_x, int
                         return false;
                     }
                 }
+                Enemy->ModificarSemilla(1);
                 return true;
             }
         }
@@ -305,7 +340,7 @@ bool Mapa::VerificarMuros(int posicion1_x, int posicion1_y, int posicion2_x, int
 
 void Mapa::Monitorear_Posiciones()
 {
-    int Gato_x, Gato_y, Perro1_x, Perro1_y, Perro2_x, Perro2_y,Perro3_x, Perro3_y,Perro0_x, Perro0_y;
+    int Gato_x, Gato_y, Perro1_x, Perro1_y, Perro2_x, Perro2_y,Perro3_x, Perro3_y,Perro0_x, Perro0_y, humano1_x, humano1_y,humano2_x, humano2_y;
     Gato_x = (P_Ppal->x()+16)/ bloques_ancho;
     Gato_y = (P_Ppal->y()+47)/ bloques_alto;
     Perro0_x = (Enemy[0]->x())/ bloques_ancho;
@@ -316,6 +351,10 @@ void Mapa::Monitorear_Posiciones()
     Perro2_y = (Enemy[2]->y()+45)/ bloques_alto;
     Perro3_x = (Enemy[3]->x())/ bloques_ancho;
     Perro3_y = (Enemy[3]->y()+45)/ bloques_alto;
+    humano1_x = (Enemy[4]->x())/ bloques_ancho;
+    humano1_y = (Enemy[4]->y()+45)/ bloques_alto;
+    humano2_x = (Enemy[5]->x())/ bloques_ancho;
+    humano2_y = (Enemy[5]->y()+45)/ bloques_alto;
     if ((Gato_x == Perro0_x && Gato_y == Perro0_y) || (Gato_x == Perro1_x && Gato_y == Perro1_y) || (Gato_x == Perro2_x && Gato_y == Perro2_y) || (Gato_x == Perro3_x && Gato_y == Perro3_y))
     {
         removeItem(P_Ppal);
@@ -327,19 +366,27 @@ void Mapa::Monitorear_Posiciones()
             addItem(P_Ppal);
         }
     }
-    if (VerificarMuros(Gato_x,Gato_y,Perro0_x,Perro0_y))
+    if (VerificarMuros(Gato_x,Gato_y,Perro0_x,Perro0_y,Enemy[0]))
     {
         Descubierto = true;
     }
-    if (VerificarMuros(Gato_x,Gato_y,Perro1_x,Perro1_y))
+    if (VerificarMuros(Gato_x,Gato_y,Perro1_x,Perro1_y,Enemy[1]))
     {
         Descubierto = true;
     }
-    if (VerificarMuros(Gato_x,Gato_y,Perro2_x,Perro2_y))
+    if (VerificarMuros(Gato_x,Gato_y,Perro2_x,Perro2_y,Enemy[2]))
     {
         Descubierto = true;
     }
-    if (VerificarMuros(Gato_x,Gato_y,Perro3_x,Perro3_y))
+    if (VerificarMuros(Gato_x,Gato_y,Perro3_x,Perro3_y,Enemy[3]))
+    {
+        Descubierto = true;
+    }
+    if (VerificarMuros(Gato_x,Gato_y,humano1_x,humano1_y,Enemy[4]))
+    {
+        Descubierto = true;
+    }
+    if (VerificarMuros(Gato_x,Gato_y,humano2_x,humano2_y,Enemy[5]))
     {
         Descubierto = true;
     }
