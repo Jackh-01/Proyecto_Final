@@ -298,6 +298,7 @@ debug/moc_mainwindow.cpp: ../Kitten_Survival/mainwindow.h \
 		../../../../QT/5.15.2/mingw81_64/include/QtCore/QString \
 		../Kitten_Survival/Personaje.h \
 		../Kitten_Survival/comida.h \
+		../Kitten_Survival/comodin.h \
 		../Kitten_Survival/enemigos.h \
 		debug/moc_predefs.h \
 		../../../../QT/5.15.2/mingw81_64/bin/moc.exe
@@ -423,6 +424,7 @@ debug/moc_mapa.cpp: ../Kitten_Survival/mapa.h \
 		../../../../QT/5.15.2/mingw81_64/include/QtCore/QString \
 		../Kitten_Survival/Personaje.h \
 		../Kitten_Survival/comida.h \
+		../Kitten_Survival/comodin.h \
 		../Kitten_Survival/enemigos.h \
 		debug/moc_predefs.h \
 		../../../../QT/5.15.2/mingw81_64/bin/moc.exe
@@ -1285,6 +1287,7 @@ debug/main.o: ../Kitten_Survival/main.cpp ../Kitten_Survival/mainwindow.h \
 		../../../../QT/5.15.2/mingw81_64/include/QtCore/QString \
 		../Kitten_Survival/Personaje.h \
 		../Kitten_Survival/comida.h \
+		../Kitten_Survival/comodin.h \
 		../Kitten_Survival/enemigos.h \
 		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/QApplication \
 		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/qapplication.h \
@@ -1428,28 +1431,9 @@ debug/mainwindow.o: ../Kitten_Survival/mainwindow.cpp ../Kitten_Survival/mainwin
 		../../../../QT/5.15.2/mingw81_64/include/QtCore/QString \
 		../Kitten_Survival/Personaje.h \
 		../Kitten_Survival/comida.h \
+		../Kitten_Survival/comodin.h \
 		../Kitten_Survival/enemigos.h \
-		ui_mainwindow.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtCore/QVariant \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/QApplication \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/qapplication.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtCore/qeventloop.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtGui/qguiapplication.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtGui/qinputmethod.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/QGraphicsView \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/qgraphicsview.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/qscrollarea.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/qframe.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/QMenuBar \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/qmenubar.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/qmenu.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/qaction.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/qactiongroup.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/QStatusBar \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/qstatusbar.h \
-		../../../../QT/5.15.2/mingw81_64/include/QtWidgets/QWidget
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\Kitten_Survival\mainwindow.cpp
 
 debug/mapa.o: ../Kitten_Survival/mapa.cpp ../../../../QT/5.15.2/mingw81_64/include/QtCore/QVector \
@@ -1572,6 +1556,7 @@ debug/mapa.o: ../Kitten_Survival/mapa.cpp ../../../../QT/5.15.2/mingw81_64/inclu
 		../../../../QT/5.15.2/mingw81_64/include/QtCore/QString \
 		../Kitten_Survival/Personaje.h \
 		../Kitten_Survival/comida.h \
+		../Kitten_Survival/comodin.h \
 		../Kitten_Survival/enemigos.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mapa.o ..\Kitten_Survival\mapa.cpp
 

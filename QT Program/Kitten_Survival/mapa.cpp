@@ -21,9 +21,7 @@ Mapa::Mapa()
     connect(Posicion_Personajes, &QTimer::timeout, this, &Mapa::Monitorear_Posiciones);
     srand(time(NULL));
     GenerarMapa();
-    GenerarEnemigosySalida();
-    MovimientoEnemigos->start(100);
-    Posicion_Personajes->start(100);
+    GenerarEnemigosySalida();    
     P_Ppal = new Personaje();
     addItem(P_Ppal);
     P_Ppal->setPos(48,16);
@@ -42,6 +40,17 @@ Mapa::Mapa()
     addItem(Ayudas[1]);
     Ayudas[1]->setPos(48*22+17,48*13+24);
     Ayudas[1]->select_sprite(0,0);
+    comer = false;    
+    iniciar = false;
+    Letrero3 = new Letreros (3);
+    addItem(Letrero3);
+    Letrero3->setPos(0,0);
+    Letrero3->select_sprite(0,0);
+    iniciar = false;
+    Letrero1 = new Letreros (1);
+    addItem(Letrero1);
+    Letrero1->setPos(48*13,48*5+24);
+    Letrero1->select_sprite(0,0);
 }
 
 Mapa::~Mapa()
@@ -60,8 +69,7 @@ void Mapa::GenerarLaberinto_1()
     {
         Matriz[i] = new int[bloques_x_mapa];
     }
-    int laberintoDatos[17][31] = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,0,0,1,1,1,0,1,1,1,0,1,1,1,1,1,0},{0,1,0,0,0,1,0,0,0,0,0,0,1,0,1,1,1,1,0,1,0,1,0,1,0,1,0,1,0,0,0},        {0,1,0,1,1,1,0,1,1,1,1,1,1,0,1,0,0,1,0,1,0,1,0,1,0,1,0,1,1,1,0},{0,1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0},{0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0},{0,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0},        {0,1,0,1,1,1,0,1,1,1,0,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0},{0,1,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,0,1,0,0,0,1,0,0,0,0,0,0,1,0},{0,1,0,1,0,1,1,1,0,1,0,1,0,0,1,0,0,0,1,1,1,1,1,0,1,1,1,1,1,1,0},{0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,0,0,0,1,0,1,0,0,0,0,0,0},{0,1,0,0,0,1,1,1,0,1,1,1,0,0,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,0},        {0,1,1,1,0,1,0,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,1,0,0,1,0},{0,1,0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,1,0,1,0},{0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,1,1,1,0,0,1,0,1,0},{0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
-    for (int i = 0; i < bloques_y_mapa; ++i)
+    int laberintoDatos[17][31]={{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,0},{0,1,0,0,0,1,0,0,0,0,0,0,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0},{0,1,0,1,1,1,0,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,1,1,0},{0,1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0},{0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,1,1,1,0,1,0},{0,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0},{0,1,0,1,1,1,0,1,1,1,0,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0},{0,1,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,0,1,0,0,0,1,0,0,0,0,0,0,1,0},{0,1,0,1,0,1,1,1,0,1,0,1,0,0,1,0,0,0,1,1,1,1,1,0,1,1,1,1,1,1,0},{0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,0,0,0,1,0,1,0,0,0,0,0,0},{0,1,0,0,0,1,1,1,0,1,1,1,0,0,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,0},{0,1,1,1,0,1,0,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,1,0,0,1,0},{0,1,0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,1,0,1,0},{0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,1,1,1,0,0,1,0,1,0},{0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};    for (int i = 0; i < bloques_y_mapa; ++i)
     {
         for (int j = 0; j < bloques_x_mapa; ++j)
         {
@@ -102,83 +110,101 @@ void Mapa::Mover_Personaje(QKeyEvent *event)
     int bloqueX = PosicionX / bloques_ancho;
     int bloqueY = PosicionY / bloques_alto;
 
-    if(event->key()==Qt::Key_D)
+    if(event->key()==Qt::Key_Return)
     {
-        FuturaPosicionX = (PosicionX+8) / bloques_ancho;
-        if (FuturaPosicionX==bloqueX)
+        removeItem(Letrero1);
+        MovimientoEnemigos->start(100);
+        Posicion_Personajes->start(100);
+        iniciar = true;
+    }
+    if (iniciar == true)
+    {
+        if(event->key()==Qt::Key_D)
         {
-            P_Ppal->tecla_pressed(event,8,0);
-        }
-        else
-        {
-            if (Matriz[bloqueY][bloqueX+1] == 0 || Matriz[bloqueY][bloqueX+1] == 2 || Matriz[bloqueY][bloqueX+1] == 3)
+            FuturaPosicionX = (PosicionX+16) / bloques_ancho;
+            if (FuturaPosicionX==bloqueX)
             {
-                P_Ppal->tecla_pressed(event,0,0);
+                P_Ppal->tecla_pressed(event,16,0);
             }
             else
             {
+                if (Matriz[bloqueY][bloqueX+1] == 0 || Matriz[bloqueY][bloqueX+1] == 2 || Matriz[bloqueY][bloqueX+1] == 3)
+                {
+                    P_Ppal->tecla_pressed(event,0,0);
+                }
+                else
+                {
 
-                P_Ppal->tecla_pressed(event,8,0);
+                    P_Ppal->tecla_pressed(event,16,0);
+                }
             }
         }
-    }
-    else if(event->key()==Qt::Key_A)
-    {
-        FuturaPosicionX = (PosicionX-8)/ bloques_ancho;
-        if (FuturaPosicionX==bloqueX)
+        else if(event->key()==Qt::Key_A)
         {
-            P_Ppal->tecla_pressed(event,8,0);
-        }
-        else
-        {
-            if (Matriz[bloqueY][bloqueX-1] == 0 || Matriz[bloqueY][bloqueX-1] == 2 || Matriz[bloqueY][bloqueX-1] == 3)
+            FuturaPosicionX = (PosicionX-16)/ bloques_ancho;
+            if (FuturaPosicionX==bloqueX)
             {
-                P_Ppal->tecla_pressed(event,0,0);
+                P_Ppal->tecla_pressed(event,16,0);
             }
             else
             {
-                P_Ppal->tecla_pressed(event,8,0);
+                if (Matriz[bloqueY][bloqueX-1] == 0 || Matriz[bloqueY][bloqueX-1] == 2 || Matriz[bloqueY][bloqueX-1] == 3)
+                {
+                    P_Ppal->tecla_pressed(event,0,0);
+                }
+                else
+                {
+                    P_Ppal->tecla_pressed(event,16,0);
+                }
             }
         }
-    }
-    else if(event->key()==Qt::Key_S)
-    {
-        FuturaPosicionY = (PosicionY+8) / bloques_alto;
-        if (FuturaPosicionY==bloqueY)
+        else if(event->key()==Qt::Key_S)
         {
-            P_Ppal->tecla_pressed(event,0,8);
-        }
-        else
-        {
-            if (Matriz[bloqueY+1][bloqueX] == 0 || Matriz[bloqueY+1][bloqueX] == 2 || Matriz[bloqueY+1][bloqueX] == 3)
+            FuturaPosicionY = (PosicionY+16) / bloques_alto;
+            if (FuturaPosicionY==bloqueY)
             {
-                P_Ppal->tecla_pressed(event,0,0);
+                P_Ppal->tecla_pressed(event,0,16);
             }
             else
             {
-                P_Ppal->tecla_pressed(event,0,8);
+                if (Matriz[bloqueY+1][bloqueX] == 0 || Matriz[bloqueY+1][bloqueX] == 2 || Matriz[bloqueY+1][bloqueX] == 3)
+                {
+                    P_Ppal->tecla_pressed(event,0,0);
+                }
+                else
+                {
+                    P_Ppal->tecla_pressed(event,0,16);
+                }
             }
         }
-    }
-    else if(event->key()==Qt::Key_W)
-    {
-        FuturaPosicionY = (PosicionY-8) / bloques_alto;
-        if (FuturaPosicionY==bloqueY)
+        else if(event->key()==Qt::Key_W)
         {
-            P_Ppal->tecla_pressed(event,0,8);
-        }
-        else
-        {
-            if (Matriz[bloqueY-1][bloqueX] == 0 || Matriz[bloqueY-1][bloqueX] == 2 || Matriz[bloqueY-1][bloqueX] == 3)
+            FuturaPosicionY = (PosicionY-16) / bloques_alto;
+            if (FuturaPosicionY==bloqueY)
             {
-                P_Ppal->tecla_pressed(event,0,0);
+                P_Ppal->tecla_pressed(event,0,16);
             }
             else
             {
-                P_Ppal->tecla_pressed(event,0,8);
+                if (Matriz[bloqueY-1][bloqueX] == 0 || Matriz[bloqueY-1][bloqueX] == 2 || Matriz[bloqueY-1][bloqueX] == 3)
+                {
+                    P_Ppal->tecla_pressed(event,0,0);
+                }
+                else
+                {
+                    P_Ppal->tecla_pressed(event,0,16);
+                }
             }
         }
+        else if(event->key()==Qt::Key_Return)
+        {
+            removeItem(Letrero1);
+            removeItem(Letrero3);
+            MovimientoEnemigos->start(100);
+            Posicion_Personajes->start(100);
+        }
     }
+
 }
 
 void Mapa::GenerarEnemigosySalida()
@@ -221,21 +247,21 @@ void Mapa::MoverEnemigos()
 {
     if (Descubierto == false)
     {
-        Enemy[0]->GenerarMovimiento(Matriz,Enemy[0]->x()+16,Enemy[0]->y()+48,16,0);
-        Enemy[1]->GenerarMovimiento(Matriz,Enemy[1]->x()+16,Enemy[1]->y()+48,16,0);
-        Enemy[2]->GenerarMovimiento(Matriz,Enemy[2]->x()+16,Enemy[2]->y()+48,16,0);
-        Enemy[3]->GenerarMovimiento(Matriz,Enemy[3]->x()+16,Enemy[3]->y()+48,16,0);
-        Enemy[4]->GenerarMovimiento(Matriz,Enemy[4]->x()+16,Enemy[4]->y()+48,16,0);
-        Enemy[5]->GenerarMovimiento(Matriz,Enemy[5]->x()+16,Enemy[5]->y()+48,16,0);
+//        Enemy[0]->GenerarMovimiento(Matriz,Enemy[0]->x()+16,Enemy[0]->y()+48,16,0);
+//        Enemy[1]->GenerarMovimiento(Matriz,Enemy[1]->x()+16,Enemy[1]->y()+48,16,0);
+//        Enemy[2]->GenerarMovimiento(Matriz,Enemy[2]->x()+16,Enemy[2]->y()+48,16,0);
+//        Enemy[3]->GenerarMovimiento(Matriz,Enemy[3]->x()+16,Enemy[3]->y()+48,16,0);
+//        Enemy[4]->GenerarMovimiento(Matriz,Enemy[4]->x()+16,Enemy[4]->y()+48,16,0);
+//        Enemy[5]->GenerarMovimiento(Matriz,Enemy[5]->x()+16,Enemy[5]->y()+48,16,0);
     }
     else
     {
-        Enemy[0]->GenerarMovimiento(Matriz,Enemy[0]->x()+16,Enemy[0]->y()+48,16,1);
-        Enemy[1]->GenerarMovimiento(Matriz,Enemy[1]->x()+16,Enemy[1]->y()+48,16,1);
-        Enemy[2]->GenerarMovimiento(Matriz,Enemy[2]->x()+16,Enemy[2]->y()+48,16,1);
-        Enemy[3]->GenerarMovimiento(Matriz,Enemy[3]->x()+16,Enemy[3]->y()+48,16,1);
-        Enemy[4]->GenerarMovimiento(Matriz,Enemy[4]->x()+16,Enemy[4]->y()+48,16,1);
-        Enemy[5]->GenerarMovimiento(Matriz,Enemy[5]->x()+16,Enemy[5]->y()+48,16,1);
+//        Enemy[0]->GenerarMovimiento(Matriz,Enemy[0]->x()+16,Enemy[0]->y()+48,16,0.5);
+//        Enemy[1]->GenerarMovimiento(Matriz,Enemy[1]->x()+16,Enemy[1]->y()+48,16,0.5);
+//        Enemy[2]->GenerarMovimiento(Matriz,Enemy[2]->x()+16,Enemy[2]->y()+48,16,0.5);
+//        Enemy[3]->GenerarMovimiento(Matriz,Enemy[3]->x()+16,Enemy[3]->y()+48,16,0.5);
+//        Enemy[4]->GenerarMovimiento(Matriz,Enemy[4]->x()+16,Enemy[4]->y()+48,16,0.5);
+//        Enemy[5]->GenerarMovimiento(Matriz,Enemy[5]->x()+16,Enemy[5]->y()+48,16,0.5);
     }
 }
 
@@ -341,6 +367,7 @@ bool Mapa::VerificarMuros(int posicion1_x, int posicion1_y, int posicion2_x, int
 void Mapa::Monitorear_Posiciones()
 {
     int Gato_x, Gato_y, Perro1_x, Perro1_y, Perro2_x, Perro2_y,Perro3_x, Perro3_y,Perro0_x, Perro0_y, humano1_x, humano1_y,humano2_x, humano2_y;
+    int Comodin1_x, Comodin1_y, Comodin2_x, Comodin2_y, Premio_x, Premio_y;
     Gato_x = (P_Ppal->x()+16)/ bloques_ancho;
     Gato_y = (P_Ppal->y()+47)/ bloques_alto;
     Perro0_x = (Enemy[0]->x())/ bloques_ancho;
@@ -355,14 +382,31 @@ void Mapa::Monitorear_Posiciones()
     humano1_y = (Enemy[4]->y()+45)/ bloques_alto;
     humano2_x = (Enemy[5]->x())/ bloques_ancho;
     humano2_y = (Enemy[5]->y()+45)/ bloques_alto;
-    if ((Gato_x == Perro0_x && Gato_y == Perro0_y) || (Gato_x == Perro1_x && Gato_y == Perro1_y) || (Gato_x == Perro2_x && Gato_y == Perro2_y) || (Gato_x == Perro3_x && Gato_y == Perro3_y))
+    Comodin1_x = (Ayudas[0]->x())/ bloques_ancho;
+    Comodin1_y = (Ayudas[0]->y())/ bloques_alto;
+    Comodin2_x = (Ayudas[1]->x())/ bloques_ancho;
+    Comodin2_y = (Ayudas[1]->y())/ bloques_alto;
+    Premio_x = (Premio->x())/ bloques_ancho;
+    Premio_y = (Premio->y())/ bloques_alto;
+    if ((Gato_x == Perro0_x && Gato_y == Perro0_y) || (Gato_x == Perro1_x && Gato_y == Perro1_y) || (Gato_x == Perro2_x && Gato_y == Perro2_y) || (Gato_x == Perro3_x && Gato_y == Perro3_y)|| (Gato_x == humano1_x && Gato_y == humano1_y)|| (Gato_x == humano2_x && Gato_y == humano2_y))
     {
+        Descubierto = false;
+        comer = false;
+        for (int i = 0; i < 6 ; i++)
+        {
+            removeItem(Enemy[i]);
+            delete Enemy[i];
+        }
+        GenerarEnemigosySalida();
         removeItem(P_Ppal);
+        addItem(Premio);
+        addItem(Ayudas[0]);
+        addItem(Ayudas[1]);
         vidas--;
         if (vidas >0)
         {
             P_Ppal->setPos(48,16);
-            P_Ppal->select_sprite(3,0);
+            P_Ppal->select_sprite(0,0);
             addItem(P_Ppal);
         }
     }
@@ -390,5 +434,33 @@ void Mapa::Monitorear_Posiciones()
     {
         Descubierto = true;
     }
-
+    if (Gato_x == Comodin1_x && Gato_y == Comodin1_y)
+    {
+        Descubierto = false;
+        removeItem(Ayudas[0]);
+    }
+    if (Gato_x == Comodin2_x && Gato_y == Comodin2_y)
+    {
+        Descubierto = false;
+        removeItem(Ayudas[1]);
+    }
+    if (Gato_x == Premio_x && Gato_y == Premio_y)
+    {
+        removeItem(Premio);
+        comer = true;
+    }
+    if (Gato_x == 0 && Gato_y == 1 && comer == true)
+    {
+        for (int i = 0; i < 6 ; i++)
+        {
+            removeItem(Enemy[i]);
+        }
+        removeItem(P_Ppal);
+        addItem(Letrero3);
+        Letrero2 = new Letreros (2);
+        addItem(Letrero2);
+        Letrero2->setPos(48*13,48*5+24);
+        Letrero2->select_sprite(0,0);
+        iniciar = false;
+    }
 }

@@ -8,6 +8,7 @@
 #include "comida.h"
 #include "comodin.h"
 #include "enemigos.h"
+#include "letreros.h"
 
 #define bloques_x_mapa 31
 #define bloques_y_mapa 17
@@ -35,12 +36,15 @@ private:
     int CoordenadaX, CoordenadaY, vidas;
     Bloques *bl_mapa[bloques_y_mapa][bloques_x_mapa];
     Personaje *P_Ppal;
-    bool Descubierto;
+    bool Descubierto, comer, iniciar;
     Enemigos *Enemy[6];
     QTimer* MovimientoEnemigos;
     QTimer* Posicion_Personajes;
     Comida* Premio;
     Comodin* Ayudas[2];
+    Letreros* Letrero1;
+    Letreros* Letrero2;
+    Letreros* Letrero3;
 
 };
 

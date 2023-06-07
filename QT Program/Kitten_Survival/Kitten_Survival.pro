@@ -13,6 +13,7 @@ SOURCES += \
     comida.cpp \
     comodin.cpp \
     enemigos.cpp \
+    letreros.cpp \
     main.cpp \
     mainwindow.cpp \
     mapa.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     comida.h \
     comodin.h \
     enemigos.h \
+    letreros.h \
     mainwindow.h \
     mapa.h \
     personaje.h \

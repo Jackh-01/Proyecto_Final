@@ -7,9 +7,9 @@ class Enemigos: public sprite
 {
 public:
     Enemigos(int numero);
-    void GenerarSemilla(int posicionX, int posicionY, int velocidad, int aceleracion);
+    void GenerarSemilla(int posicionX, int posicionY, int velocidad, float aceleracion);
     void ModificarSemilla (int nuevaSemilla);
-    void GenerarMovimiento(int** map, int posicionX, int posicionY, int velocidad,int ace);
+    void GenerarMovimiento(int** map, int posicionX, int posicionY, int velocidad,float ace);
     void PerseguirPersonaje(int posicionX_Personaje, int posicionY_Personaje);
 
 signals:

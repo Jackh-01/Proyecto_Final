@@ -15,5 +15,10 @@
         <file>Sprite/FishSheet1.png</file>
         <file>Sprite/151346-61e6dc8b6dc37f21997f60b4b52fc324.jpg</file>
         <file>Sprite/861565115.png</file>
+        <file>Sprite/YOU win.png</file>
+        <file>Sprite/Start.png</file>
+        <file>Sprite/Finish_1.png</file>
+        <file>Sprite/start_1.png</file>
+        <file>Sprite/start_2.png</file>
     </qresource>
 </RCC>

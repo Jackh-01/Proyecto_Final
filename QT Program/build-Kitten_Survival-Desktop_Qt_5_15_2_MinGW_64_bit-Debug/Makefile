@@ -248,7 +248,6 @@ Makefile: ../Kitten_Survival/Kitten_Survival.pro ../../../../QT/5.15.2/mingw81_6
 		../../../../QT/5.15.2/mingw81_64/mkspecs/features/qt_config.prf \
 		../../../../QT/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf \
 		../../../../QT/5.15.2/mingw81_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		../../../../QT/5.15.2/mingw81_64/mkspecs/features/exclusive_builds.prf \
 		../../../../QT/5.15.2/mingw81_64/mkspecs/features/toolchain.prf \
 		../../../../QT/5.15.2/mingw81_64/mkspecs/features/default_pre.prf \
@@ -277,6 +276,7 @@ Makefile: ../Kitten_Survival/Kitten_Survival.pro ../../../../QT/5.15.2/mingw81_6
 		../../../../QT/5.15.2/mingw81_64/lib/Qt5Gui.prl \
 		../../../../QT/5.15.2/mingw81_64/lib/Qt5Core.prl \
 		../../../../QT/5.15.2/mingw81_64/lib/qtmain.prl \
+		.qmake.stash \
 		../../../../QT/5.15.2/mingw81_64/mkspecs/features/build_pass.prf \
 		../Kitten_Survival/Pictures.qrc
 	$(QMAKE) -o Makefile ..\Kitten_Survival\Kitten_Survival.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -458,7 +458,6 @@ Makefile: ../Kitten_Survival/Kitten_Survival.pro ../../../../QT/5.15.2/mingw81_6
 ../../../../QT/5.15.2/mingw81_64/mkspecs/features/qt_config.prf:
 ../../../../QT/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf:
 ../../../../QT/5.15.2/mingw81_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 ../../../../QT/5.15.2/mingw81_64/mkspecs/features/exclusive_builds.prf:
 ../../../../QT/5.15.2/mingw81_64/mkspecs/features/toolchain.prf:
 ../../../../QT/5.15.2/mingw81_64/mkspecs/features/default_pre.prf:
@@ -487,6 +486,7 @@ Makefile: ../Kitten_Survival/Kitten_Survival.pro ../../../../QT/5.15.2/mingw81_6
 ../../../../QT/5.15.2/mingw81_64/lib/Qt5Gui.prl:
 ../../../../QT/5.15.2/mingw81_64/lib/Qt5Core.prl:
 ../../../../QT/5.15.2/mingw81_64/lib/qtmain.prl:
+.qmake.stash:
 ../../../../QT/5.15.2/mingw81_64/mkspecs/features/build_pass.prf:
 ../Kitten_Survival/Pictures.qrc:
 qmake: FORCE

@@ -26,7 +26,7 @@ Enemigos::Enemigos(int numero)
     tiempo = 0;
 }
 
-void Enemigos::GenerarSemilla(int posicionX, int posicionY,int velocidad, int aceleracion)
+void Enemigos::GenerarSemilla(int posicionX, int posicionY,int velocidad, float aceleracion)
 {
     bloqueX = posicionX / bloques_ancho;
     bloqueY = posicionY / bloques_alto;
@@ -65,7 +65,7 @@ void Enemigos::ModificarSemilla(int nuevaSemilla)
     semilla = nuevaSemilla;
 }
 
-void Enemigos::GenerarMovimiento(int** map, int posicionX, int posicionY, int velocidad, int ace)
+void Enemigos::GenerarMovimiento(int** map, int posicionX, int posicionY, int velocidad, float ace)
 {
     GenerarSemilla( posicionX, posicionY, velocidad, ace);
     if (map[FuturoBloqueY_1][FuturoBloqueX_1]==1 || map[FuturaPosicionY][FuturaPosicionX]==1)
