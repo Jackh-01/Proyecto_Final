@@ -9,6 +9,7 @@
 #include "comodin.h"
 #include "enemigos.h"
 #include "letreros.h"
+#include "vidas.h"
 
 #define bloques_x_mapa 31
 #define bloques_y_mapa 17
@@ -45,6 +46,7 @@ private:
     Letreros* Letrero1;
     Letreros* Letrero2;
     Letreros* Letrero3;
+    Vidas* Vidas_gato;
 
 };
 

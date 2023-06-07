@@ -18,7 +18,8 @@ SOURCES += \
     mainwindow.cpp \
     mapa.cpp \
     personaje.cpp \
-    sprite.cpp
+    sprite.cpp \
+    vidas.cpp
 
 HEADERS += \
     bloques.h \
@@ -29,7 +30,8 @@ HEADERS += \
     mainwindow.h \
     mapa.h \
     personaje.h \
-    sprite.h
+    sprite.h \
+    vidas.h
 
 FORMS += \
     mainwindow.ui

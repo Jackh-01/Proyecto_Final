@@ -1,24 +1,17 @@
 <RCC>
     <qresource prefix="/">
-        <file>Sprite/425.jpg</file>
-        <file>Sprite/26346.jpg</file>
         <file>Sprite/golfers.png</file>
-        <file>Sprite/kisspng-stone-wall-sprite-tile-based-video-game-isometric-5aee2a881524f1.5094501115255578960866.png</file>
         <file>Sprite/modern-punks.png</file>
         <file>Sprite/PC Computer - Stardew Valley - Cat.png</file>
         <file>Sprite/PC Computer - Stardew Valley - Dog Brown.png</file>
-        <file>Sprite/PC Computer - Stardew Valley - Furniture.png</file>
-        <file>Sprite/villager-females.png</file>
-        <file>Sprite/villager-males_1.png</file>
         <file>Sprite/NES - Bomberman - General Sprites.png</file>
         <file>Sprite/NES_-_Bomberman_-_General_Sprites-removebg-preview.png</file>
         <file>Sprite/FishSheet1.png</file>
         <file>Sprite/151346-61e6dc8b6dc37f21997f60b4b52fc324.jpg</file>
         <file>Sprite/861565115.png</file>
-        <file>Sprite/YOU win.png</file>
-        <file>Sprite/Start.png</file>
         <file>Sprite/Finish_1.png</file>
         <file>Sprite/start_1.png</file>
         <file>Sprite/start_2.png</file>
+        <file>Sprite/8_bit_life_bar_1-removebg-preview.png</file>
     </qresource>
 </RCC>

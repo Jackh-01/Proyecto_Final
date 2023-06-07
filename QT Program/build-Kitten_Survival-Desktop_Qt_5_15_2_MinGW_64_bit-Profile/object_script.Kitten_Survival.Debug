@@ -8,6 +8,7 @@ debug/mainwindow.o
 debug/mapa.o
 debug/personaje.o
 debug/sprite.o
+debug/vidas.o
 debug/qrc_Pictures.o
 debug/moc_mainwindow.o
 debug/moc_mapa.o

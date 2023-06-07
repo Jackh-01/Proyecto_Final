@@ -8,6 +8,7 @@ release/mainwindow.o
 release/mapa.o
 release/personaje.o
 release/sprite.o
+release/vidas.o
 release/qrc_Pictures.o
 release/moc_mainwindow.o
 release/moc_mapa.o
