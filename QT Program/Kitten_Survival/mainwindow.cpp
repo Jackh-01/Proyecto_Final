@@ -11,7 +11,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     Niveles = new Mapa();
-    //Niveles->setSceneRect(0,0,ui->graphicsView->width()-2,ui->graphicsView->height()-2);
     Niveles->setSceneRect(0,0,1918,1078);
     ui->graphicsView->setScene(Niveles);
 }

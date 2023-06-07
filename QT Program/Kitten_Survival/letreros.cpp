@@ -6,7 +6,6 @@ Letreros::Letreros(int numero)
     if (numero == 1)
     {
         set_imagen(960,533,0,0,2,2,":/Sprite/Finish_1.png",48*4,48*4);
-//        set_imagen(960,533,0,0,2,2,":/Sprite/Finish_1.png",48*5,48*4);
     }
     else if (numero == 2)
     {
